@@ -1,0 +1,33 @@
+<div class="row page-head">
+    <div class="col-lg-8">
+        <h1>Dashboard</h1>
+    </div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div>
+            <table datatable="ng" dt-options="dtOptions" class="table panel">
+                <thead class="thead-default">
+                    <tr>
+						<th>Send Payment On</th>
+						<th>ID</th>
+						<th>Amount</th>
+						<th>Pay Type</th>
+						<th>Employee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="payment in payments" ng-class="{processed: !payment.upcoming}">
+						<td data-order="{{ $index }}">{{ getMoment(payment.send_on) | amDateFormat:'MMMM Do, YYYY' }}</td>
+						<td>
+							<i class="glyphicon glyphicon-ok fa-fw" aria-hidden="true" ng-show="!payment.upcoming"></i> {{payment.upcoming ? 'Upcoming' : 'Processed'}}
+						</td>
+						<td>${{ payment.amount }}</td>
+						<td>{{ payment.pay_type }}</td>
+						<td><a href="/#/employees/{{ payment.employee_id }}">{{ payment.employee_name }}</a></td>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+</div>

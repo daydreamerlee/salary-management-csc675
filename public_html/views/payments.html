@@ -1,0 +1,79 @@
+<div id="createPayment" class="modal fade" role="dialog" my-modal>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Set Up New Payment</h4>
+			</div>
+			<div class="modal-body">
+				<p><strong>Contract begins on:</strong> {{recap.begin | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
+				<p><strong>Contract ends on:</strong> {{recap.end | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
+				<p><strong>Total duration:</strong> {{ recap.duration }} {{ recap.resolution }}</p>
+				<p><strong>Pay {{ recap.type }}:</strong> ${{ recap.amount }}</p>
+				<p class="text-success"><strong>Pay total:</strong> ${{ recap.totalAmount }}</p>
+				<hr />
+				<form role="form">
+					<div class="row">
+						<div class="col-lg-12">
+							<table class="table panel">
+				                <thead class="thead-default">
+				                    <tr>
+				                    	<th>#</th>
+										<th>Send Payment On</th>
+										<th>Amount</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+				                    <tr ng-repeat="payment in newPayment">
+				                    	<td>{{ $index+1 }}</td>
+										<td>{{ payment.send_on_moment | amDateFormat:'MMMM Do, YYYY'}}</td>
+										<td>${{ recap.singlePayment }}</td>
+									</tr>
+				                </tbody>
+				            </table>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-success" ng-click="save()">Set Up Payments</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row page-head">
+    <div class="col-lg-8">
+        <h1>Payments</h1>
+    </div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div>
+            <table datatable="ng" dt-options="dtOptions" class="table panel">
+                <thead class="thead-default">
+                    <tr>
+						<th>ID</th>
+						<th>Employee</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Pay Type</th>
+						<th>Amount</th>
+						<th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="contract in contracts">
+						<td>{{ contract.id }}</td>
+						<td><a href="/#/contracts/{{ contract.id }}">{{ contract.employee_name }}</a></td>
+						<td>{{ contract.date_contract_begin }}</td>
+						<td>{{ contract.date_contract_end }}</td>
+						<td>{{ contract.pay_type }}</td>
+						<td>${{ contract.pay_amount }}</td>
+						<td><button type="button" data-toggle="modal" data-target="#createPayment" class="recurring-payment btn btn-success" ng-click="setActiveContract(contract.id)">Add Recurring Payment</button></td>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,169 @@
+<div id="createEmployee" class="modal fade" role="dialog" my-modal>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add New Employee</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<h4>Personal</h4>
+					<hr>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.title}">
+								<select class="form-control" ng-model="newEmployee.title">
+									<option value="" disabled selected>Title</option>
+									<option ng-repeat="option in data.titleOptions" value="{{option.id}}">{{option.name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.first_name}">
+								<input class="form-control" placeholder="First Name" ng-model="newEmployee.first_name"></input>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.last_name}">
+								<input class="form-control" placeholder="Last Name" ng-model="newEmployee.last_name"></input>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.ssn}">
+								<input class="form-control" placeholder="SSN" ng-model="newEmployee.ssn"></input>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.gender}">
+								<select class="form-control" ng-model="newEmployee.gender">
+									<option value="" disabled selected>Gender</option>
+									<option ng-repeat="option in data.genderOptions" value="{{option.id}}">{{option.name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<h4>Address</h4>
+					<hr>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.street}">
+								<input class="form-control" placeholder="Street" ng-model="newEmployee.street"></input>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.city}">
+								<input class="form-control" placeholder="City" ng-model="newEmployee.city"></input>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.state}">
+								<select class="form-control" ng-model="newEmployee.state">
+									<option value="" disabled selected>State</option>
+									<option ng-repeat="option in data.states" value="{{option.id}}">{{option.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.zip}">
+								<input class="form-control" placeholder="ZIP" ng-model="newEmployee.zip"></input>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.country}">
+								<select class="form-control" ng-model="newEmployee.country">
+									<option value="" disabled selected>Country</option>
+									<option ng-repeat="option in data.countries" value="{{option.id}}">{{option.name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<h4>Company Related</h4>
+					<hr>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.job_title}">
+								<input class="form-control" placeholder="Job Title" ng-model="newEmployee.job_title"></input>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.email}">
+								<input class="form-control" placeholder="Email" ng-model="newEmployee.email"></input>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.phone_number}">
+								<input class="form-control" placeholder="Phone Number" ng-model="newEmployee.phone_number"></input>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.department}">
+								<select class="form-control" ng-model="newEmployee.department">
+									<option value="" disabled selected>Department</option>
+									<option ng-repeat="option in data.departments" value="{{option.id}}">{{option.name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{'error': !validateFields.office}">
+								<select class="form-control" ng-model="newEmployee.office">
+									<option value="" disabled selected>Office</option>
+									<option ng-repeat="option in data.offices" value="{{option.id}}">{{option.name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-success" ng-click="save()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row page-head">
+    <div class="col-lg-8">
+        <h1>Employees</h1>
+    </div>
+    <div class="col-lg-4">
+    	 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createEmployee"><i class="glyphicon glyphicon-plus fa-fw" aria-hidden="true"></i>Add New Employee</button>
+    </div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div>
+            <table datatable="ng" dt-options="dtOptions" class="table panel">
+                <thead class="thead-default">
+                    <tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Job Title</th>
+						<th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="employee in employees">
+						<td>{{ employee.id }}</td>
+						<td><a href="/#/employees/{{ employee.id }}">{{ employee.first_name }}</a></td>
+						<td><a href="/#/employees/{{ employee.id }}">{{ employee.last_name }}</a></td>
+						<td>{{ employee.job_title }}</td>
+						<td><a href="/#/departments/{{ employee.department }}">{{ employee.department_name }}</a></td>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+</div>

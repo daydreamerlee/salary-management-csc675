@@ -1,0 +1,63 @@
+<div id="createDepartment" class="modal fade" role="dialog" my-modal>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add New Department</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<h4>Basic Information</h4>
+					<hr>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-group" ng-class="{'error': !validateFields.name}">
+								<input class="form-control" placeholder="Name" ng-model="newDepartment.name"></input>
+							</div>
+							<div class="form-group" ng-class="{'error': !validateFields.manager}">
+								<select class="form-control" ng-model="newDepartment.manager">
+									<option value="" disabled selected>Manager</option>
+									<option ng-repeat="option in data.employees" value="{{option.id}}">{{option.first_name}} {{option.last_name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-success" ng-click="save()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row page-head">
+    <div class="col-lg-8">
+        <h1>Departments</h1>
+    </div>
+    <div class="col-lg-4">
+    	 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createDepartment"><i class="glyphicon glyphicon-plus fa-fw" aria-hidden="true"></i>Add New Department</button>
+    </div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div>
+            <table datatable="ng" dt-options="dtOptions" class="table panel">
+                <thead class="thead-default">
+                    <tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Manager</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="department in departments">
+						<td>{{ department.id }}</td>
+						<td><a href="/#/departments/{{ department.id }}">{{ department.name }}</a></td>
+						<td><a href="/#/employees/{{ department.manager }}">{{ department.manager_name }}</a></td>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+</div>
